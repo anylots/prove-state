@@ -3,6 +3,7 @@ pragma solidity ^0.8.24;
 
 import {BatchHeaderCodecV0} from "./BatchHeaderCodecV0.sol";
 import {BatchHeaderCodecV1} from "./BatchHeaderCodecV1.sol";
+import {IZkEvmVerifier} from "./IZkEvmVerifier.sol";
 
 contract Rollup {
     /// @notice Store committed public input hash.
@@ -13,6 +14,12 @@ contract Rollup {
 
     /// @notice Store committed public data hash.
     mapping(uint256 batchIndex => bytes32 dataHash) public dataHashs;
+
+    address public verifier;
+
+    constructor(address _verifier) {
+        verifier = _verifier;
+    }
 
     function proveState(
         bytes calldata _batchHeader,
@@ -88,5 +95,6 @@ contract Rollup {
         piHashs[_batchIndex] = _publicInputHash;
         blobVersionedHashs[_batchIndex] = _blobVersionedHash;
         dataHashs[_batchIndex] = _dataHash;
+        IZkEvmVerifier(verifier).verifyBatch(_batchProof, _publicInputHash);
     }
 }

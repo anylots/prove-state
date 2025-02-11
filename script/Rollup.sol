@@ -12,7 +12,7 @@ contract RollupScript is Script {
     function run() public {
         vm.startBroadcast();
 
-        rollup = new Rollup();
+        rollup = new Rollup(address(0));
 
         vm.stopBroadcast();
     }

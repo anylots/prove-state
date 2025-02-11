@@ -8,7 +8,7 @@ contract RollupTest is Test {
     Rollup public rollup;
 
     function setUp() public {
-        rollup = new Rollup();
+        rollup = new Rollup(address(0));
     }
 
     function test_Increment() public {}
