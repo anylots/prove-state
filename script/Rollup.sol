@@ -2,17 +2,17 @@
 pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
-import {Counter} from "../src/Counter.sol";
+import {Rollup} from "../src/Rollup.sol";
 
-contract CounterScript is Script {
-    Counter public counter;
+contract RollupScript is Script {
+    Rollup public rollup;
 
     function setUp() public {}
 
     function run() public {
         vm.startBroadcast();
 
-        counter = new Counter();
+        rollup = new Rollup();
 
         vm.stopBroadcast();
     }
